@@ -1,16 +1,37 @@
-require("dotenv").config();
+/* require("dotenv").config(); */
+
 let keys = require("./keys.js");
 let command = process.argv[2];
-
+/* 
 if(command === "concert-this"){
 
 }
-if(command === "spotify-this-song"){
+elseif(command === "spotify-this-song"){
     
 }
-if(command === "movie-this"){
+elseif(command === "movie-this"){
     
 }
-if(command === "do-what-it-says"){
+elseif(command === "do-what-it-says"){
     
-}
+} */
+
+// Basic Node application for requesting data from the Spotify website via axios
+// Here we incorporate the "axios" npm package
+
+
+var Spotify = require('node-spotify-api');
+
+var spotify = new Spotify({
+  id: ,
+  secret: 
+});
+ 
+spotify
+  .search({ type: 'track', query: 'All the Small Things' })
+  .then(function(response) {
+    console.log(response);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
