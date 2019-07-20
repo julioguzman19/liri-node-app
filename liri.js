@@ -1,7 +1,11 @@
 require("dotenv").config(); 
 
+
 const axios = require("axios");
 const keys = require("./keys.js");
+const moment = require("moment");
+const fs=require("fs");
+
 let command = process.argv[2];
 
 switch(command){
@@ -12,7 +16,7 @@ switch(command){
     spotifyOutput();
     break;
   case "movie-this":
-      omdbOutput()();
+      omdbOutput();
     break;
   //Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
   //It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt
@@ -30,14 +34,22 @@ function spotifyOutput() {
     id: keys.spotify.id,
     secret: keys.spotify.secret
   });
-  const spotifySong = process.argv.slice(3).join(" "); // process.argv[3] node liri.js concert-this <artist/band name here>
+  
+
+  let spotifySong = process.argv.slice(3).join(" ");  // process.argv[3] node liri.js concert-this <artist/band name here>
+ 
+  if(process.argv[3] === undefined){
+    spotifySong = "The Sign Ace of Base";
+  }
+
   spotify
     .search({ type: 'track', query: spotifySong })
     .then(function (response) {
-      console.log("\n Artist name: " + response.tracks.items[0].album.artists[0].name); //artist name
+     
+     console.log("\n Artist name: " + response.tracks.items[0].album.artists[0].name); //artist name
       console.log("\n Song name: " + response.tracks.items[0].name); //song name
       console.log("\n Album name: " + response.tracks.items[0].album.name); //album name
-      console.log("\n Link Preview: " + response.tracks.items[0].external_urls.spotify); //preview link
+      console.log("\n Link Preview: " + response.tracks.items[0].external_urls.spotify); //preview link 
     })
     .catch(function (err) {
       console.log(err);
@@ -47,14 +59,14 @@ function spotifyOutput() {
 /*---------Bandsintown---------- */
 function bandsintownOutput() {
   let bandsAPIKey = process.env.bandsintown_SECRET;
-  let bandSearch = "Marshmellow"; //ex: process.argv[3] "Marshmellow" >>> node liri.js concert-this <artist/band name here>
+  let bandSearch = process.argv.slice(3).join(" ");; //ex: process.argv[3] "Marshmellow" >>> node liri.js concert-this <artist/band name here>
   let queryURL = "https://rest.bandsintown.com/artists/" + bandSearch + "/events?app_id=" + bandsAPIKey
   //example: https://rest.bandsintown.com/artists/Marshmellow/events?app_id=
   axios.get(queryURL).then(
     function (response) {
       console.log(response.data[0].venue.name);
       console.log(response.data[0].venue.city);
-      console.log(response.data[0].datetime); //use moment to format "MM/DD/YYYY"
+      console.log(moment(response.data[0].datetime).format('MM/DD/YYYY')); //use moment to format "MM/DD/YYYY"
     },
 
     function (error) {
@@ -79,7 +91,12 @@ function bandsintownOutput() {
 
   /*---------OMDB Movies---------- */
 function omdbOutput() {
-  let movieName = "batman"; //ex: process.argv[3] "batman" >>> node liri.js movie-this '<movie name here>'
+  let movieName = process.argv[3]; //ex: process.argv[3] "batman" >>> node liri.js movie-this '<movie name here>'
+
+  if(process.argv[3] === undefined){
+     movieName = "Mr.Nobody";
+  }
+
   let OMDBapikey = process.env.OMDB_SECRET;
   let queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=" + OMDBapikey
   axios
@@ -94,6 +111,7 @@ function omdbOutput() {
         console.log("\nLanguage of the Movie: " + response.data.Language);
         console.log("\nPlot of the Movie: " + response.data.Plot);
         console.log("\nActors in the Movie: " + response.data.Actors);
+        console.log("\nIf you haven't watched Mr. Nobody, then you should: http://www.imdb.com/title/tt0485947/\nIt's on Netflix!");
       },
 
       function (error) {
