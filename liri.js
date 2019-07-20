@@ -60,9 +60,7 @@ Venue location
 Date of the Event (use moment to format this as "MM/DD/YYYY")
 */
 
-// Run the axios.get function...
-// The axios.get function takes in a URL and returns a promise (just like $.ajax)
-let bandsAPIKey = "";
+let bandsAPIKey = process.env.bandsintown_SECRET;
 let queryURL = "https://rest.bandsintown.com/artists/" + "Marshmellow" + "/events?app_id=" +bandsAPIKey
 //example: https://rest.bandsintown.com/artists/Marshmellow/events?app_id=
 axios.get(queryURL).then(
@@ -103,9 +101,9 @@ axios.get(queryURL).then(
    * Plot of the movie.
    * Actors in the movie.
   */
-  /*
+  
   let movieName = "batman"; //will use prcess.argv [3] >>> node liri.js movie-this '<movie name here>'
-  let OMDBapikey = ""
+  let OMDBapikey = process.env.OMDB_SECRET;
   let queryURL = "http://www.omdbapi.com/?t=" + movieName +"&y=&plot=short&apikey=" + OMDBapikey
   axios
   .get(queryURL)
@@ -134,4 +132,4 @@ axios.get(queryURL).then(
       console.log(error.config);
     }
   );
-  */
+  
