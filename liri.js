@@ -95,13 +95,25 @@ axios.get("queryURL").then(
 
 
   /*---------OMDB Movies---------- */
-  let queryURL = "http://www.omdbapi.com/t=" + "Batman" + "?apikey="
-  //example: http://www.omdbapi.com/?apikey=[yourkey]&   using t= as parameter
+  /*
+   * Title of the movie.
+   * Year the movie came out.
+   * IMDB Rating of the movie.
+   * Rotten Tomatoes Rating of the movie.
+   * Country where the movie was produced.
+   * Language of the movie.
+   * Plot of the movie.
+   * Actors in the movie.
+  */
+
+  let movieName = "batman"; //will use prcess.argv [3] >>> node liri.js movie-this '<movie name here>'
+  let apikey = "7d55e4c5"
+  let queryURL = "http://www.omdbapi.com/?t=" + movieName +"&y=&plot=short&apikey=" + apikey
   axios
-  .get("queryURL")
+  .get(queryURL)
   .then(
     function(response) {
-      // If the axios was successful...
+      // If the axios was successful... 
       // Then log the body from the site!
       console.log(response.data); 
     },
