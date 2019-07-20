@@ -60,14 +60,12 @@ Venue location
 Date of the Event (use moment to format this as "MM/DD/YYYY")
 */
 
-
-
 // Run the axios.get function...
 // The axios.get function takes in a URL and returns a promise (just like $.ajax)
 
-/* let queryURL = "https://rest.bandsintown.com/artists/" + "Marshmellow" + "/events?app_id="
+ let queryURL = "https://rest.bandsintown.com/artists/" + "Marshmellow" + "/events?app_id="
 //example: https://rest.bandsintown.com/artists/Marshmellow/events?app_id=
-axios.get("queryURL").then(
+axios.get(queryURL).then(
   function(response) {
     // If the axios was successful...
     // Then log the body from the site!
@@ -91,7 +89,7 @@ axios.get("queryURL").then(
     }
     console.log(error.config);
   }
-); */
+); 
 
 
   /*---------OMDB Movies---------- */
@@ -105,9 +103,9 @@ axios.get("queryURL").then(
    * Plot of the movie.
    * Actors in the movie.
   */
-
+  /*
   let movieName = "batman"; //will use prcess.argv [3] >>> node liri.js movie-this '<movie name here>'
-  let apikey = "7d55e4c5"
+  let apikey = ""
   let queryURL = "http://www.omdbapi.com/?t=" + movieName +"&y=&plot=short&apikey=" + apikey
   axios
   .get(queryURL)
@@ -136,3 +134,4 @@ axios.get("queryURL").then(
       console.log(error.config);
     }
   );
+  */
