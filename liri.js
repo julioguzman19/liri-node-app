@@ -60,6 +60,7 @@ Venue location
 Date of the Event (use moment to format this as "MM/DD/YYYY")
 */
 
+/*
 let bandsAPIKey = process.env.bandsintown_SECRET;
 let queryURL = "https://rest.bandsintown.com/artists/" + "Marshmellow" + "/events?app_id=" +bandsAPIKey
 //example: https://rest.bandsintown.com/artists/Marshmellow/events?app_id=
@@ -88,30 +89,25 @@ axios.get(queryURL).then(
     console.log(error.config);
   }
 ); 
-
+*/
 
   /*---------OMDB Movies---------- */
   /*
-   * Title of the movie.
-   * Year the movie came out.
-   * IMDB Rating of the movie.
-   * Rotten Tomatoes Rating of the movie.
-   * Country where the movie was produced.
-   * Language of the movie.
-   * Plot of the movie.
-   * Actors in the movie.
-  */
-  
-  let movieName = "batman"; //will use prcess.argv [3] >>> node liri.js movie-this '<movie name here>'
+  let movieName ="batman"; //ex: process.argv[3] "batman" >>> node liri.js movie-this '<movie name here>'
   let OMDBapikey = process.env.OMDB_SECRET;
   let queryURL = "http://www.omdbapi.com/?t=" + movieName +"&y=&plot=short&apikey=" + OMDBapikey
   axios
   .get(queryURL)
   .then(
     function(response) {
-      // If the axios was successful... 
-      // Then log the body from the site!
-      console.log(response.data); 
+      console.log("\nTitle of the Movie: "+response.data.Title);
+      console.log("\nYear of the Movie: "+response.data.Year);
+      console.log("\nIMDB rating of the Movie: "+response.data.imdbRating);
+      console.log("\nRotten Tomatoes Rating of the Movie: "+response.data.Ratings[1]);
+      console.log("\nCountry production of the Movie: "+response.data.Country);
+      console.log("\nLanguage of the Movie: "+response.data.Language);
+      console.log("\nPlot of the Movie: "+response.data.Plot);
+      console.log("\nActors in the Movie: "+response.data.Actors);
     },
   
     function(error) {
@@ -132,4 +128,5 @@ axios.get(queryURL).then(
       console.log(error.config);
     }
   );
+  */
   
