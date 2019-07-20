@@ -34,10 +34,10 @@ spotify
   .search({ type: 'track', query: 'All the Small Things' })
   .then(function(response) {
     //navigate through object to Artist, song name (which i have), preview link of song from spotify, album of song
-    console.log(response.tracks.items[0].name);
-    /* console.log(response.tracks.items[0].name);
-    console.log(response.tracks.items[0].name);
-    console.log(response.tracks.items[0].name); */
+    console.log(response.tracks.items[0].album.artists[0].name); //artist name
+    console.log(response.tracks.items[0].name); //song name
+    console.log(response.tracks.items[0].album.name); //album name
+    console.log(response.tracks.items[0].external_urls.spotify); //preview link
   })
   .catch(function(err) {
     console.log(err);
