@@ -21,6 +21,7 @@
 
 - searchWord/s: will be band, song, or movie looking to seach on above commands
 
+- Video on how to run: https://drive.google.com/file/d/18MezbAnnzafl-aEvteDfSTKo6zsS2jxh/view
 ## Built With:
 - HTML
 - CSS
@@ -28,3 +29,4 @@
 - Node.js
 - Axios
 - Moment.js
+
