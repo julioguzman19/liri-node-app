@@ -52,10 +52,9 @@ function spotifyOutput(value) {
 }
 
 /*---------Bandsintown---------- */
-function bandsintownOutput() {
+function bandsintownOutput(value) {
   let bandsAPIKey = process.env.bandsintown_SECRET;
-  let bandSearch = process.argv.slice(3).join(" ");; //ex: process.argv[3] "Marshmellow" >>> node liri.js concert-this <artist/band name here>
-  let queryURL = "https://rest.bandsintown.com/artists/" + bandSearch + "/events?app_id=" + bandsAPIKey
+  let queryURL = "https://rest.bandsintown.com/artists/" + value + "/events?app_id=" + bandsAPIKey
   //example: https://rest.bandsintown.com/artists/Marshmellow/events?app_id=
   axios.get(queryURL).then(
     function (response) {
@@ -85,15 +84,12 @@ function bandsintownOutput() {
 }
 
   /*---------OMDB Movies---------- */
-function omdbOutput() {
-  let movieName = process.argv[3]; //ex: process.argv[3] "batman" >>> node liri.js movie-this '<movie name here>'
-
-  if(process.argv[3] === undefined){
-     movieName = "Mr.Nobody";
+function omdbOutput(value) {
+  if(value === undefined){
+     value = "Mr.Nobody";
   }
-
   let OMDBapikey = process.env.OMDB_SECRET;
-  let queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=" + OMDBapikey
+  let queryURL = "http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=" + OMDBapikey
   axios
     .get(queryURL)
     .then(
@@ -101,12 +97,15 @@ function omdbOutput() {
         console.log("\nTitle of the Movie: " + response.data.Title);
         console.log("\nYear of the Movie: " + response.data.Year);
         console.log("\nIMDB rating of the Movie: " + response.data.imdbRating);
-        console.log("\nRotten Tomatoes Rating of the Movie: " + response.data.Ratings[1]);
+        console.log("\nRotten Tomatoes Rating of the Movie: " + response.data.Ratings[1].Value);
         console.log("\nCountry production of the Movie: " + response.data.Country);
-        console.log("\nLanguage of the Movie: " + response.data.Language);
+        console.log("\nLanguage/s of the Movie: " + response.data.Language);
         console.log("\nPlot of the Movie: " + response.data.Plot);
         console.log("\nActors in the Movie: " + response.data.Actors);
-        console.log("\nIf you haven't watched Mr. Nobody, then you should: http://www.imdb.com/title/tt0485947/\nIt's on Netflix!");
+        
+        if(value ==="Mr.Nobody"){
+          console.log("\nIf you haven't watched Mr. Nobody, then you should: http://www.imdb.com/title/tt0485947/\nIt's on Netflix!");
+        }
       },
 
       function (error) {
