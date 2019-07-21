@@ -2,7 +2,7 @@
 
 ## Objective:
 - Liri is a Language Interpretation and Recognition Interface
-- Liri is a Command line node app that takes in parameters and gives you back data.
+- Liri is a Command line node app that takes in parameters and gives you back data
 - Liri will retrieve data from Spotify,Bandsintown, or OMDB API based on users input via the command line
 
 ## Layout Includes:

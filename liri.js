@@ -5,7 +5,7 @@ const keys = require("./keys.js");
 const moment = require("moment");
 const fs = require("fs");
 
-const command = process.argv[2];
+let command = process.argv[2];
 let value = process.argv.slice(3).join(" ");
 
 switch(command){
@@ -84,7 +84,7 @@ function bandsintownOutput(value) {
 
   /*---------OMDB Movies---------- */
 function omdbOutput(value) {
-  if(value === undefined){
+  if(value === ""){
      value = "Mr.Nobody";
   }
   let OMDBapikey = process.env.OMDB_SECRET;
@@ -93,17 +93,19 @@ function omdbOutput(value) {
     .get(queryURL)
     .then(
       function (response) {
-        console.log("\nTitle of the Movie: " + response.data.Title);
-        console.log("\nYear of the Movie: " + response.data.Year);
-        console.log("\nIMDB rating of the Movie: " + response.data.imdbRating);
-        console.log("\nRotten Tomatoes Rating of the Movie: " + response.data.Ratings[1].Value);
-        console.log("\nCountry production of the Movie: " + response.data.Country);
-        console.log("\nLanguage/s of the Movie: " + response.data.Language);
-        console.log("\nPlot of the Movie: " + response.data.Plot);
-        console.log("\nActors in the Movie: " + response.data.Actors);
         
         if(value ==="Mr.Nobody"){
           console.log("\nIf you haven't watched Mr. Nobody, then you should: http://www.imdb.com/title/tt0485947/\nIt's on Netflix!");
+        }
+        else{
+          console.log("\nTitle of the Movie: " + response.data.Title);
+          console.log("\nYear of the Movie: " + response.data.Year);
+          console.log("\nIMDB rating of the Movie: " + response.data.imdbRating);
+          console.log("\nRotten Tomatoes Rating of the Movie: " + response.data.Ratings[1].Value);
+          console.log("\nCountry production of the Movie: " + response.data.Country);
+          console.log("\nLanguage/s of the Movie: " + response.data.Language);
+          console.log("\nPlot of the Movie: " + response.data.Plot);
+          console.log("\nActors in the Movie: " + response.data.Actors);
         }
       },
 
