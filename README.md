@@ -23,8 +23,6 @@
 
 - Video on how to run: https://drive.google.com/file/d/18MezbAnnzafl-aEvteDfSTKo6zsS2jxh/view
 ## Built With:
-- HTML
-- CSS
 - JavaScript
 - Node.js
 - Axios
