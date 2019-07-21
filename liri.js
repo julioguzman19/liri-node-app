@@ -1,13 +1,12 @@
 require("dotenv").config(); 
 
-
 const axios = require("axios");
 const keys = require("./keys.js");
 const moment = require("moment");
 const fs = require("fs");
 
 const command = process.argv[2];
-const value = process.argv.slice(3).join(" ");
+let value = process.argv.slice(3).join(" ");
 
 switch(command){
   case "concert-this":
