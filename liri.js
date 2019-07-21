@@ -4,30 +4,29 @@ require("dotenv").config();
 const axios = require("axios");
 const keys = require("./keys.js");
 const moment = require("moment");
-const fs=require("fs");
+const fs = require("fs");
 
-let command = process.argv[2];
+const command = process.argv[2];
+const value = process.argv.slice(3).join(" ");
 
 switch(command){
   case "concert-this":
-      bandsintownOutput();
+      bandsintownOutput(value);
     break;
   case "spotify-this-song":
-    spotifyOutput();
+    spotifyOutput(value);
     break;
   case "movie-this":
-      omdbOutput();
+    omdbOutput(value);
     break;
-  //Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
-  //It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt
-  //Edit the text in random.txt to test out the feature for movie-this and concert-this.
+
   case "do-what-it-says":
-    spotifyOutput();
+    doWhatItSays(value);
     break;
 }
 
 /*---------SPOTIFY---------- */
-function spotifyOutput() {
+function spotifyOutput(value) {
   var Spotify = require('node-spotify-api');
 
   const spotify = new Spotify({
@@ -35,21 +34,17 @@ function spotifyOutput() {
     secret: keys.spotify.secret
   });
   
-
-  let spotifySong = process.argv.slice(3).join(" ");  // process.argv[3] node liri.js concert-this <artist/band name here>
- 
-  if(process.argv[3] === undefined){
-    spotifySong = "The Sign Ace of Base";
+  if(value === undefined){
+    value = "The Sign Ace of Base";
   }
 
   spotify
-    .search({ type: 'track', query: spotifySong })
+    .search({ type: 'track', query: value })
     .then(function (response) {
-     
-     console.log("\n Artist name: " + response.tracks.items[0].album.artists[0].name); //artist name
-      console.log("\n Song name: " + response.tracks.items[0].name); //song name
-      console.log("\n Album name: " + response.tracks.items[0].album.name); //album name
-      console.log("\n Link Preview: " + response.tracks.items[0].external_urls.spotify); //preview link 
+        console.log("\n Artist name: " + response.tracks.items[0].album.artists[0].name); //artist name
+        console.log("\n Song name: " + response.tracks.items[0].name); //song name
+        console.log("\n Album name: " + response.tracks.items[0].album.name); //album name
+        console.log("\n Link Preview: " + response.tracks.items[0].external_urls.spotify); //preview link 
     })
     .catch(function (err) {
       console.log(err);
@@ -134,3 +129,25 @@ function omdbOutput() {
     );
 }
   
+/*---------do-what-it-says ---------- */
+function doWhatItSays(){
+  fs.readFile("random.txt", "utf8", function (err, data) {
+    
+    if (err) {
+      return console.log(err);
+    }
+
+    data = data.split(",");
+    switch (data[0]) {
+      case "concert-this":
+          bandsintownOutput(data[1]);
+        break;
+      case "spotify-this-song":
+        spotifyOutput(data[1]);
+        break;
+      case "movie-this":
+        omdbOutput(data[1]);
+        break;
+    }
+  });
+}
