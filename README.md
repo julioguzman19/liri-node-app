@@ -21,7 +21,8 @@
 
 - searchWord/s: will be band, song, or movie looking to seach on above commands
 
-- Demo Video: https://drive.google.com/file/d/18MezbAnnzafl-aEvteDfSTKo6zsS2jxh/view
+- Demo Video via Google Drive: https://drive.google.com/file/d/18MezbAnnzafl-aEvteDfSTKo6zsS2jxh/view
+- Demo Video via GitHub: https://github.com/julioguzman19/liri-node-app/blob/master/App%20Demo%20Liri.mp4
 
 - Demo Images:
 
