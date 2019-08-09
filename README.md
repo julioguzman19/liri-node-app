@@ -24,6 +24,7 @@
 - Video on how to run: https://drive.google.com/file/d/18MezbAnnzafl-aEvteDfSTKo6zsS2jxh/view
 
 ![GitHub Logo](images/liri-node 1.png)
+![alt text](https://github.com/julioguzman19/liri-node-app/blob/master/Images/liri-node%201.PNG)
 
 ## Built With:
 - JavaScript
